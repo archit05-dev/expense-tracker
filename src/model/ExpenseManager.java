@@ -51,6 +51,17 @@ public class ExpenseManager {
         return total;
     }
 
+    public ArrayList<Expense> filterByCategory(String category) {
+        ArrayList<Expense> filteredExpenses = new ArrayList<>();
+        for (Expense expense : expenses) {
+            if (expense.getCategory().equalsIgnoreCase(category)) {
+                filteredExpenses.add(expense);
+            }
+        }
+        return filteredExpenses;
+        
+    }
+
 
     
 }

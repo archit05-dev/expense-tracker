@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import model.Expense;
 import model.ExpenseManager;
 
@@ -59,5 +60,29 @@ public class Main {
         // Test deleting a non-existent expense
         System.out.println("\nDeleting expense with ID 10...");
         expenseManager.deleteExpense(10);
+
+        ArrayList<Expense> foodExpenses =
+        expenseManager.filterByCategory("food");
+
+         if (foodExpenses.isEmpty())
+           {
+                System.out.println("No matching expenses found.");
+            } else 
+                {
+                    System.out.println("\n===== Filtered Expenses (Category: Food) =====");
+                  for (Expense expense : foodExpenses)
+                  {
+                    System.out.println(expense);
+                  }
+                }
+
+
+
+
+
+
+
+
+
     }
 }
