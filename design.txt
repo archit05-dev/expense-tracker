@@ -1,0 +1,122 @@
+# Expense Tracker v1
+
+## Goal
+
+Learn file handling and data persistence in Java.
+
+---
+
+## Features
+
+1. Add an expense
+2. View all expenses
+3. Delete an expense
+4. Filter expenses by category
+5. Show total expenses
+6. Save expenses to a file
+7. Load expenses when the application starts
+8. Exit
+
+---
+
+## Class Design
+
+### Expense
+
+Represents a single expense entry.
+
+#### Fields
+
+* `expenseId`
+* `amount`
+* `category`
+* `description`
+* `date`
+
+#### Methods
+
+* Constructor
+* Getters
+* `toString()`
+
+---
+
+### ExpenseManager
+
+Manages all expense-related operations.
+
+#### Fields
+
+* `ArrayList<Expense> expenses`
+
+#### Methods
+
+* `addExpense()`
+* `displayExpenses()`
+* `deleteExpense()`
+* `filterByCategory()`
+* `calculateTotalExpenses()`
+* `saveToFile()`
+* `loadFromFile()`
+
+---
+
+### Main
+
+Handles user interaction.
+
+#### Responsibilities
+
+* Display menu
+* Read user input
+* Call `ExpenseManager` methods
+* Handle invalid input and exceptions
+
+---
+
+## Data Flow
+
+```text
+Main
+  ↓
+ExpenseManager
+  ↓
+ArrayList<Expense>
+```
+
+---
+
+## File Storage
+
+File name:
+
+`expenses.txt`
+
+Example format:
+
+```text
+1,250.0,Food,Lunch,2026-06-17
+2,1200.0,Transport,Monthly Pass,2026-06-18
+```
+
+Each line represents one expense.
+
+---
+
+## Development Order
+
+1. Create `Expense` class
+2. Create `ExpenseManager`
+3. Implement `addExpense()`
+4. Implement `displayExpenses()`
+5. Build the menu-driven interface
+6. Implement `deleteExpense()`
+7. Implement `filterByCategory()`
+8. Implement `calculateTotalExpenses()`
+9. Implement `saveToFile()`
+10. Implement `loadFromFile()`
+11. Test all features
+12. Update README and push to GitHub
+
+```
+```
