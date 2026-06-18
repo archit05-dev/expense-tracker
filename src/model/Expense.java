@@ -38,16 +38,18 @@ public class Expense {
         return date;
     }
 
-    @Override
-    public String toString() {
-        return "Expense\n" + 
-               "--------------------\n" +
-                "Expense ID: " + expenseId + "\n" +
-                "Amount: " + amount + "\n" +
-                "Category: " + category + "\n" +
-                "Description: " + description + "\n" +
-                "Date: " + date + "\n" +
-                "--------------------\n";
+       @Override
+       public String toString() {
+         return "Expense ID: " + expenseId + "\n" +
+           "Amount: Rs. " + amount + "\n" +
+           "Category: " + category + "\n" +
+           "Description: " + description + "\n" +
+           "Date: " + date + "\n";
+        }
+
+
+    public String toFileString() {
+        return expenseId + "," + amount + "," + category + "," + description + "," + date;
     }
     
 }
