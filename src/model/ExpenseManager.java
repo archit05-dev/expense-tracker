@@ -14,7 +14,16 @@ public class ExpenseManager {
     }
 
     public void addExpense(Expense expense) {
+        for(Expense existingExpense : expenses)
+        {
+            if(existingExpense.getExpenseId()==expense.getExpenseId())
+            {
+                System.out.println("ExpenseId already exist ");
+                return;
+            }
+        }
         expenses.add(expense);
+        saveToFile();
         System.out.println("Expense added successfully.");
     }
 
@@ -42,6 +51,7 @@ public class ExpenseManager {
             if (expenses.get(i).getExpenseId() == expenseId) {
                 expenses.remove(i);
                 System.out.println("Expense deleted successfully.");
+                saveToFile();
                 return;
             }
         }
