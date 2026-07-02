@@ -1,171 +1,36 @@
-
-import java.io.*;
-import java.util.ArrayList;
-import model.Expense;
-import model.ExpenseManager;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        ExpenseManager expenseManager = new ExpenseManager();
+        // Database URL
+        String url = "jdbc:mysql://localhost:3306/expense_tracker";
 
-        int choice=0;
+        // MySQL username
+        String username = "root";
 
+        // Your MySQL password
+        String password = "Arch@909";
 
-        do {
+        try {
 
-            System.out.println("\n===== Expense Tracker =====");
-            System.out.println("1. Add Expense");
-            System.out.println("2. View Expenses");
-            System.out.println("3. Delete Expense");
-            System.out.println("4. Filter by Category");
-            System.out.println("5. Show Total Expenses");
-            System.out.println("6. Exit\n");
+            // Try to establish a connection
+            Connection connection =
+                    DriverManager.getConnection(url, username, password);
 
-            System.out.print("Enter your choice: ");
+            System.out.println("Connection Successful!");
 
-            try
-                {
-                        choice = Integer.parseInt(br.readLine());
+            // Always close the connection when done
+            connection.close();
 
-                }
-                catch(IOException e)
-                {
-                        System.out.println("Error reading input. Please try again.");
-                        continue;
-                }
-                catch(NumberFormatException e)
-                {
-                        System.out.println("Invalid input. Please enter a number.");
-                        continue;
-                }
+        } catch (SQLException e) {
 
+            System.out.println("Connection Failed!");
 
-
-            switch(choice)
-            {
-                case 1:
-                        try
-                        {
-                                 System.out.print("Enter Expense ID: ");
-                                 int expenseId = Integer.parseInt(br.readLine());
-
-                                  System.out.print("Enter Amount: ");
-                                  double amount = Double.parseDouble(br.readLine());
-
-                                  System.out.print("Enter Category: ");
-                                  String category = br.readLine();
-
-                                  System.out.print("Enter Description: ");
-                                  String description = br.readLine();
-
-                                  System.out.print("Enter Date (YYYY-MM-DD): ");
-                                  String date = br.readLine();
-
-                                  Expense expense = new Expense(
-                                                              expenseId,
-                                                              amount,
-                                                              category,
-                                                              description,
-                                                              date
-                                                                        );
-
-                                 expenseManager.addExpense(expense);
-                        }
-
-                        catch(NumberFormatException e)
-                        {
-                           System.out.println("Invalid number entered. Please try again.");
-                        }
-
-                        catch(IOException e)
-                        {
-                                System.out.println("Error reading input. Please try again.");
-                        }
-
-                    break;
-
-                 case 2:
-                        expenseManager.displayExpenses();
-                        break;
-
-                 case 3:
-                        try
-                        {
-                                 System.out.print("Enter Expense ID for expense to be deleted: ");
-                                 int expenseId=Integer.parseInt(br.readLine());
-
-                                 expenseManager.deleteExpense(expenseId);
-
-                        }
-
-                        catch(NumberFormatException e)
-                        {
-                           System.out.println("Invalid number entered. Please try again.");
-                        }
-
-                        catch(IOException e)
-                        {
-                                System.out.println("Error reading input. Please try again.");
-                        }
-                      
-
-
-                break;
-
-                 case 4:
-                        try
-                        {
-                               System.out.print("Enter category: ");
-                               String category=br.readLine();
-                               
-                               ArrayList<Expense> filteredExpenses = expenseManager.filterByCategory(category);
-
-                               if(filteredExpenses.isEmpty())
-                               {
-                                System.out.println("No expense found of this category");
-                               }
-
-                               else
-                               {
-                                System.out.println("\n===== Filtered Expenses =====");
-                                
-                                for(Expense expense : filteredExpenses)
-                                {
-                                        System.out.println(expense);
-                                        System.out.println("--------------------");
-                                }
-                               }
-                        }
-
-
-                        catch(IOException e)
-                        {
-                                System.out.println("Error reading input. Please try again.");
-                        }
-
-
-                break;
-
-                 case 5:
-                        System.out.println("Total Expenses: Rs. "+ expenseManager.calculateTotalExpenses());
-                        break;
-
-                 case 6:
-                        System.out.println("Exiting ......");
-                        break;        
-
-                 default:
-                        System.out.println("Invalid input Please select an option from 1 to 6");        
-
-
-            }
-
-        } while (choice != 6);
-
-
-
+            e.printStackTrace();
+        }
     }
 }
